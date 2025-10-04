@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Multiplication Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <h1>Multiplication Calculator</h1>
+            <p class="subtitle">Powered by C++ Backend</p>
+            
+            <form id="calculatorForm">
+                <div class="input-group">
+                    <label for="num1">First Number:</label>
+                    <input type="number" id="num1" name="num1" step="any" placeholder="Enter first number" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="num2">Second Number:</label>
+                    <input type="number" id="num2" name="num2" step="any" placeholder="Enter second number" required>
+                </div>
+                
+                <button type="submit" id="multiplyBtn" class="multiply-btn">
+                    <span class="btn-text">Multiply</span>
+                    <span class="loading" style="display: none;">Computing...</span>
+                </button>
+            </form>
+            
+            <div id="result" class="result-area">
+                <div class="result-label">Result:</div>
+                <div id="resultValue" class="result-value">-</div>
+            </div>
+            
+            <div id="error" class="error-message" style="display: none;"></div>
+        </div>
+        
+        <footer class="footer">
+            <p>C++ HTTP Server with cpp-httplib | Frontend: HTML/CSS/JS</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
