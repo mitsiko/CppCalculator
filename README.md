@@ -29,10 +29,10 @@ CppCalculator/
 cd CppCalculator
 
 # Compile the C++ server
-g++ -std=c++11 -pthread -o calculator src/main.cpp
+g++ -std=c++11 -pthread -o calculator src/main.cpp -lws2_32
 
 # Run the server
-./calculator
+./calculator.exe
 ```
 
 ### Option 2: Using Visual Studio (Windows)
