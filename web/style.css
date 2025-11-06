@@ -12,7 +12,7 @@
 }
 
 body {
-    background-color: #f5f3f2;
+    background-color: #e4ebe4;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
     display: flex;
@@ -37,6 +37,7 @@ body {
     background-color: transparent;
     color: #444;
     border: 1px solid #444;
+    border-radius: 3px;
     padding: 10px 28px;
     border-radius: 0px;
     font-family: 'Michroma',monospace;
@@ -47,14 +48,14 @@ body {
 }
 
 .toggle-history-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.10);
 }
 
 .calculator-top-design-container{
     display: flex;              /* activates flexbox */
     flex-direction: row;        /* default value; ensures horizontal layout */
-    justify-content: flex-start; /* controls horizontal alignment */
+    justify-content: space-between; /* controls horizontal alignment */
     align-items: center;        /* controls vertical alignment */
 }
 
@@ -65,12 +66,11 @@ body {
     align-items: center;     
     margin-bottom: 10px;   /* controls vertical alignment */
     margin-left: 10px;
-    border: 1px solid #320707;
 }
 
 .sensor-box{
     background: #320707;
-    border-right:1px solid #352e2e;
+    border-right:1px solid #423a3a;
     width: 25px;
     height: 25px;
 }
@@ -100,17 +100,22 @@ body {
 
 /* Calculator card - Dynamic width based on history visibility */
 .calculator {
-    background: #babba9;
-    border-radius: 20px;
+    position: relative;
     padding: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: -20px 20px 10px #33353323;
     backdrop-filter: blur(10px);
-    border: 1px solid #4444444f;
+    border: 5px solid transparent;
+    border-radius: 20px; 
+
+    /* gradient border that works with border-radius */
+    background: 
+        linear-gradient(to right, #acad9d, #babba9,#c6c7b5, #c6c7b5) padding-box, 
+        linear-gradient(to right, #87877a, #b0b19f, #b0b19f, #b0b19f, #b0b19f) border-box;
+
     transition: all 0.3s ease;
-    flex: 0 0 350px; /* allows responsive resizing */
+    flex: 0 0 350px;
     max-width: 600px;
 }
-
 /* Calculator width when history is hidden */
 .calculator-wrapper.history-hidden .calculator {
     width: 350px;
@@ -126,15 +131,20 @@ body {
 /* History Tape - 20% width when visible */
 .history-tape {
     flex: 0 1 250px; /* flexible width, max 250px */
-    background: #f9f9f9;
-    border-radius: 10px;
+    border-radius: 3px;
     padding: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: -20px 20px 10px #33353323;
+    backdrop-filter: blur(10px);
     font-family: 'Michroma', monospace;
     max-height: 500px;
     overflow-y: auto;
     border: 1px solid #4444444f;
     flex-shrink: 0;
+
+    border: 1px solid transparent; /* ✅ transparent to let gradient show */
+    background: 
+        linear-gradient(to right, #e7e5e0, #fffdf9, #fffdf9, #fffdf9) padding-box, 
+        linear-gradient(to right, #878581, #fffdf9, #fffdf9) border-box;
 }
 
 .history-tape.hidden {
@@ -160,6 +170,7 @@ body {
     background: transparent;
     color: #444;
     border: 1px solid #444;
+    border-radius: 1px;
     padding: 3px 10px;
     font-family: 'Michroma',monospace;
     font-size: 0.5rem;
@@ -169,8 +180,8 @@ body {
 }
 
 .clear-history-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.10);
 }
 
 .history-content {
@@ -209,9 +220,14 @@ body {
 
 /* Display */
 .display {
-    background: #1e1e1e;
     padding: 10px;
-    border-radius: 12px;
+    border-radius: 5px;
+
+    border: 5px solid transparent;
+    background: 
+        linear-gradient(to right,#1e1e1e, #1e1e1e) padding-box,  
+        linear-gradient(to left, #75766b, #989989,#989989,  #979888) border-box;
+
     margin-bottom: 20px;
     text-align: right;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -238,39 +254,39 @@ body {
 .calculator-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    gap: 5px;
 }
 
 /* Button styles */
 .calculator-grid button {
     padding: 15px;
     font-size: 1.25rem;
-    border: none;
-    border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
-    background: #686e66;
     color: #c2c3b1;
     font-weight: 500;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .calculator-grid button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(1px);
     background: #f0f0f00f;
 }
 
 .calculator-grid button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(1px);
 }
 
 /* Special buttons */
 .op-btn {
-    background: #f4f4e9 !important;
     color: #686e66 !important;
     font-size: 1.5rem !important;
+
+    border-radius: 8px; 
+    border: 5px solid transparent; 
+    background:
+        linear-gradient(to right, #e3e3d7, #d1d1ca) padding-box,
+        linear-gradient(to right, #e0e0d9, #ecece2) border-box;
 }
 
 .op-btn.active {
@@ -279,17 +295,41 @@ body {
 }
 
 .equals-btn {
-    background: #dc782d;
+    border-radius: 8px; /* ✅ add rounding if you want */
+    border: 5px solid transparent; /* ✅ transparent to let gradient show */
+    background:
+        linear-gradient(to left, #c6773a, #d77f3c) padding-box,
+        linear-gradient(to right, #c6773a, #d98545) border-box;
     color: #c2c3b1 !important;
 }
 
 .clear-btn, .clear-entry-btn, .backspace-btn {
-    background: #5d5443 !important;
+    border-radius: 8px; 
+    border: 5px solid transparent; 
+    background:
+        linear-gradient(to left, #4f4839, #716753) padding-box,
+        linear-gradient(to right, #4e4638, #5d5443) border-box;
     color: #c2c3b1 !important;
 }
 
 .zero-btn {
     grid-column: span 2;
+}
+
+.decimal-btn{
+    border-radius: 8px; /* ✅ add rounding if you want */
+    border: 5px solid transparent; /* ✅ transparent to let gradient show */
+    background:
+        linear-gradient(to left, #686e66, #919791) padding-box,
+        linear-gradient(to right, #61685f, #838b81) border-box;
+}
+
+.number-btn{
+    border-radius: 8px; /* ✅ add rounding if you want */
+    border: 5px solid transparent; /* ✅ transparent to let gradient show */
+    background:
+        linear-gradient(to left, #686e66, #919791) padding-box,
+        linear-gradient(to right, #61685f, #838b81) border-box;
 }
 
 /* Number buttons hover effect */
