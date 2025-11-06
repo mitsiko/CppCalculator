@@ -22,25 +22,37 @@ int main() {
     // Serve static files from web directory
     server.set_mount_point("/", "./web");
 
-    // API endpoint for multiplication
-    server.Post("/api/multiply", [](const httplib::Request& req, httplib::Response& res) {
+    // API endpoint for calculator operations
+    server.Post("/api/calculate", [](const httplib::Request& req, httplib::Response& res) {
         try {
-            std::cout << "Received multiplication request: " << req.body << std::endl;
+            std::cout << "Received calculation request: " << req.body << std::endl;
 
-            // Parse the request body (expecting "num1=x&num2=y" format)
+            // Parse the request body (expecting "num1=x&operation=op&num2=y" format)
             std::string body = req.body;
             double num1 = 0, num2 = 0;
+            std::string operation;
 
             // Simple parser for form data
             size_t num1_pos = body.find("num1=");
             size_t num2_pos = body.find("num2=");
 
             if (num1_pos != std::string::npos && num2_pos != std::string::npos) {
+                size_t op_pos = body.find("operation=");
+                if (op_pos == std::string::npos) {
+                    res.status = 400;
+                    res.set_content("{\"error\": \"Missing operation\"}", "application/json");
+                    return;
+                }
+
                 // Extract num1
                 size_t num1_start = num1_pos + 5; // Skip "num1="
                 size_t num1_end = body.find("&", num1_start);
-                if (num1_end == std::string::npos) num1_end = body.length();
                 std::string num1_str = body.substr(num1_start, num1_end - num1_start);
+
+                // Extract operation
+                size_t op_start = op_pos + 10; // Skip "operation="
+                size_t op_end = body.find("&", op_start);
+                operation = body.substr(op_start, op_end - op_start);
 
                 // Extract num2
                 size_t num2_start = num2_pos + 5; // Skip "num2="
@@ -52,10 +64,30 @@ int main() {
                 num1 = std::stod(num1_str);
                 num2 = std::stod(num2_str);
 
-                // Calculate result
-                double result = num1 * num2;
-
-                std::cout << "Multiplying " << num1 << " * " << num2 << " = " << result << std::endl;
+                // Calculate result based on operation
+                double result;
+                if (operation == "add") {
+                    result = num1 + num2;
+                    std::cout << "Adding " << num1 << " + " << num2 << " = " << result << std::endl;
+                } else if (operation == "subtract") {
+                    result = num1 - num2;
+                    std::cout << "Subtracting " << num1 << " - " << num2 << " = " << result << std::endl;
+                } else if (operation == "multiply") {
+                    result = num1 * num2;
+                    std::cout << "Multiplying " << num1 << " * " << num2 << " = " << result << std::endl;
+                } else if (operation == "divide") {
+                    if (num2 == 0) {
+                        res.status = 400;
+                        res.set_content("{\"error\": \"Cannot divide by zero\"}", "application/json");
+                        return;
+                    }
+                    result = num1 / num2;
+                    std::cout << "Dividing " << num1 << " / " << num2 << " = " << result << std::endl;
+                } else {
+                    res.status = 400;
+                    res.set_content("{\"error\": \"Invalid operation\"}", "application/json");
+                    return;
+                }
 
                 // Return JSON response
                 std::stringstream json_response;

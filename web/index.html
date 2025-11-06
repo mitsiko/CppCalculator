@@ -3,43 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C++ Multiplication Calculator</title>
+    <title>C++ Basic Calculator</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="calculator">
-            <h1>Multiplication Calculator</h1>
-            <p class="subtitle">Powered by C++ Backend</p>
+    <div class="main-container">        
+        <div class="calculator-wrapper">
             
-            <form id="calculatorForm">
-                <div class="input-group">
-                    <label for="num1">First Number:</label>
-                    <input type="number" id="num1" name="num1" step="any" placeholder="Enter first number" required>
+            <div class="calculator">
+                <div class="calculator-top-design-container">
+                    <div class="calculator-model">903M</div>
+                    <div class="calculator-sensor">
+                        <div class="sensor-box"></div>
+                        <div class="sensor-box"></div>
+                        <div class="sensor-box"></div>
+                        <div class="sensor-box"></div>
+                    </div>
                 </div>
                 
-                <div class="input-group">
-                    <label for="num2">Second Number:</label>
-                    <input type="number" id="num2" name="num2" step="any" placeholder="Enter second number" required>
+                <div class="display">
+                    <div class="previous-operand"></div>
+                    <div class="current-operand">0</div>
                 </div>
                 
-                <button type="submit" id="multiplyBtn" class="multiply-btn">
-                    <span class="btn-text">Multiply</span>
-                    <span class="loading" style="display: none;">Computing...</span>
-                </button>
-            </form>
-            
-            <div id="result" class="result-area">
-                <div class="result-label">Result:</div>
-                <div id="resultValue" class="result-value">-</div>
+                <form id="calculatorForm">
+                    <div class="calculator-grid">
+                        <button type="button" class="clear-btn" data-action="clear">C</button>
+                        <button type="button" class="clear-entry-btn" data-action="clear-entry">CE</button>
+                        <button type="button" class="backspace-btn" data-action="backspace">⌫</button>
+                        <button type="button" class="op-btn" data-operation="divide">÷</button>
+
+                        <button type="button" class="number-btn" data-number="7">7</button>
+                        <button type="button" class="number-btn" data-number="8">8</button>
+                        <button type="button" class="number-btn" data-number="9">9</button>
+                        <button type="button" class="op-btn" data-operation="multiply">×</button>
+
+                        <button type="button" class="number-btn" data-number="4">4</button>
+                        <button type="button" class="number-btn" data-number="5">5</button>
+                        <button type="button" class="number-btn" data-number="6">6</button>
+                        <button type="button" class="op-btn" data-operation="subtract">−</button>
+
+                        <button type="button" class="number-btn" data-number="1">1</button>
+                        <button type="button" class="number-btn" data-number="2">2</button>
+                        <button type="button" class="number-btn" data-number="3">3</button>
+                        <button type="button" class="op-btn" data-operation="add">+</button>
+
+                        <button type="button" class="number-btn zero-btn" data-number="0">0</button>
+                        <button type="button" class="decimal-btn" data-number=".">.</button>
+                        <button type="button" class="equals-btn" data-action="calculate">=</button>
+                    </div>
+
+                    <input type="hidden" id="operation" name="operation">
+                    <input type="hidden" id="num1" name="num1">
+                    <input type="hidden" id="num2" name="num2">
+                </form>
+
+                <div id="error" class="error-message" style="display: none;"></div>
             </div>
-            
-            <div id="error" class="error-message" style="display: none;"></div>
+
+            <div id="historyTape" class="history-tape" style="display: none;">
+                <div class="history-header">
+                    <h3>History Tape</h3>
+                    <button id="clearHistoryBtn" class="clear-history-btn">Clear</button>
+                </div>
+                <div class="history-content" id="historyContent">
+                    <p class="empty-history">No calculations yet</p>
+                </div>
+            </div>
         </div>
-        
-        <footer class="footer">
-            <p>C++ HTTP Server with cpp-httplib | Frontend: HTML/CSS/JS</p>
-        </footer>
+        <button id="toggleHistoryBtn" class="toggle-history-btn">View History Tape</button>  
+    </div>
+    <div class="footer">
+        <p>C++ HTTP Server with cpp-httplib | Frontend: HTML/CSS/JS | Keyboard Enabled</p>
     </div>
     
     <script src="script.js"></script>
