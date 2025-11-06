@@ -48,7 +48,7 @@ body {
 }
 
 .toggle-history-btn:hover {
-    transform: translateY(-1px);
+    transform: translateY(2px);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.10);
 }
 
@@ -180,7 +180,7 @@ body {
 }
 
 .clear-history-btn:hover {
-    transform: translateY(-1px);
+    transform: translateY(2px);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.10);
 }
 
@@ -254,7 +254,7 @@ body {
 .calculator-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
+    gap: 10px;
 }
 
 /* Button styles */
@@ -269,8 +269,7 @@ body {
 }
 
 .calculator-grid button:hover {
-    transform: translateY(1px);
-    background: #f0f0f00f;
+    transform: translateY(3px);
 }
 
 .calculator-grid button:active {
@@ -285,21 +284,27 @@ body {
     border-radius: 8px; 
     border: 5px solid transparent; 
     background:
-        linear-gradient(to right, #e3e3d7, #d1d1ca) padding-box,
-        linear-gradient(to right, #e0e0d9, #ecece2) border-box;
+        linear-gradient(to right, #f4f2e7, #bebeb9) padding-box,
+        linear-gradient(to right, #c5c5c1, #e0dfd5) border-box;
 }
 
 .op-btn.active {
-    background: #dc782d !important;
-    color: white !important;
+    color: #686e66 !important;
+    font-size: 1.5rem !important;
+
+    border-radius: 8px; 
+    border: 5px solid transparent; 
+    background:
+        linear-gradient(to right, #cfc9c9, #a0a09e) padding-box,
+        linear-gradient(to right, #a0a09e, #c5c1c1) border-box;
 }
 
 .equals-btn {
     border-radius: 8px; /* ✅ add rounding if you want */
     border: 5px solid transparent; /* ✅ transparent to let gradient show */
     background:
-        linear-gradient(to left, #c6773a, #d77f3c) padding-box,
-        linear-gradient(to right, #c6773a, #d98545) border-box;
+        linear-gradient(to right, #de8a4a,#b86e36) padding-box,
+        linear-gradient(to right, #b86e36, #d78a4f) border-box;
     color: #c2c3b1 !important;
 }
 
@@ -307,8 +312,8 @@ body {
     border-radius: 8px; 
     border: 5px solid transparent; 
     background:
-        linear-gradient(to left, #4f4839, #716753) padding-box,
-        linear-gradient(to right, #4e4638, #5d5443) border-box;
+        linear-gradient(to right, #1d866f, #146f5b) padding-box,
+        linear-gradient(to right, #166151, #21856f) border-box;
     color: #c2c3b1 !important;
 }
 
@@ -332,10 +337,6 @@ body {
         linear-gradient(to right, #61685f, #838b81) border-box;
 }
 
-/* Number buttons hover effect */
-.number-btn:hover, .decimal-btn:hover {
-    background: #f0f0f00f;
-}
 
 /* Error message */
 .error-message {
@@ -426,5 +427,5 @@ body {
 }
 
 .current-operand.updated {
-    animation: resultUpdate 0.3s ease;
+    animation: none;
 }
