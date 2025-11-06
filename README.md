@@ -44,18 +44,10 @@ All other keys are ignored to prevent accidental input.
 - **Toggle Visibility:** View/Hide calculation history with a button click
 - **Receipt-Style Display:** Monospaced font with a classic receipt appearance
 - **Format:** Shows calculations as `[First Input] [Operator] [Second Input] = [Result]`
+- **Chronological Order:** Oldest calculations at the top, newest at the bottom
 - **Persistent Storage:** Keeps last 50 calculations in memory
 - **Clear Function:** Remove all history with one click
-- **Auto-scroll:** Newest calculations appear at the top
-
-### Layout Design
-- **Container Width:** 70% of viewport (responsive)
-- **History Hidden:** Calculator centered in container
-- **History Visible:** 
-  - 20% - History Tape (left)
-  - 5% - Gap
-  - 75% - Calculator (right)
-- **Mobile Responsive:** Stacks vertically on smaller screens
+- **Auto-scroll:** Automatically scrolls to show newest calculation at the bottom
 
 ### Error Handling
 - **Division by Zero:** Gracefully handled with error message
@@ -150,8 +142,9 @@ clang++ -std=c++11 -pthread -o calculator src/main.cpp
 
 4. **View History:**
    - Click "View History Tape" button at the top
-   - History tape appears on the left side
-   - Shows all recent calculations in receipt format
+   - History tape appears on the right side
+   - Shows all recent calculations in chronological order (oldest at top, newest at bottom)
+   - Automatically scrolls to show the most recent calculation
    - Click "Clear" to erase history
    - Click "Hide History Tape" to collapse
 
