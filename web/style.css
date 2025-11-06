@@ -144,7 +144,7 @@ body {
     border: 1px solid transparent; /* ✅ transparent to let gradient show */
     background: 
         linear-gradient(to right, #e7e5e0, #fffdf9, #fffdf9, #fffdf9) padding-box, 
-        linear-gradient(to right, #878581, #fffdf9, #fffdf9) border-box;
+        linear-gradient(to right, #969592, #fffdf9, #fffdf9) border-box;
 }
 
 .history-tape.hidden {
@@ -225,7 +225,7 @@ body {
 
     border: 5px solid transparent;
     background: 
-        linear-gradient(to right,#1e1e1e, #1e1e1e) padding-box,  
+        linear-gradient(to right,#1e2d24, #1e2d24) padding-box,  
         linear-gradient(to left, #75766b, #989989,#989989,  #979888) border-box;
 
     margin-bottom: 20px;
@@ -237,7 +237,7 @@ body {
     font-family: 'Calculator';
     min-height: 24px;
     font-size: 1rem;
-    color: #56ffa5;
+    color: #43df9c;
     margin-bottom: 5px;
 }
 
@@ -245,7 +245,7 @@ body {
     font-family: 'Calculator';
     font-size: 2.3rem;
     font-weight: 700;
-    color: #56ffa5;
+    color: #43df9c;
     word-wrap: break-word;
     word-break: break-all;
 }
@@ -304,7 +304,7 @@ body {
     border: 5px solid transparent; /* ✅ transparent to let gradient show */
     background:
         linear-gradient(to right, #de8a4a,#b86e36) padding-box,
-        linear-gradient(to right, #b86e36, #d78a4f) border-box;
+        linear-gradient(to right, #b86e36, #de8a4a) border-box;
     color: #c2c3b1 !important;
 }
 
