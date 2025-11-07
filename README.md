@@ -219,10 +219,6 @@ Response: `{"result": 50}`
 ### Styling (CSS)
 - **Layout:** CSS Grid for calculator buttons, Flexbox for overall layout
 - **Responsive:** Media queries for mobile devices
-- **Theme:** Purple gradient background with modern card design
-- **Typography:** 
-  - Main UI: Segoe UI
-  - History Tape: Courier New (monospaced)
 - **Animations:** Smooth transitions and result updates
 
 ## Troubleshooting

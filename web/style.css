@@ -11,6 +11,10 @@
     box-sizing: border-box;
 }
 
+p {
+    font-family: 'Michroma'
+}
+
 body {
     background-color: #e4ebe4;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
