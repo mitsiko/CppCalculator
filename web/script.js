@@ -10,62 +10,109 @@ window.addEventListener('load', function() {
             loadingScreen.style.display = 'none';
             mainContent.style.display = 'block';
             
-            // Initialize scramble animation after loading screen
-            if (typeof gsap !== 'undefined' && typeof ScrambleTextPlugin !== 'undefined') {
-                initScrambleAnimation();
-            } else {
-                console.warn('GSAP ScrambleTextPlugin not available');
-                // Fallback: just show the text normally
-                document.querySelectorAll('.scramble-text').forEach(el => {
-                    el.style.opacity = '1';
-                });
-            }
+            // Initialize animations after loading screen
+            initTextAnimations();
         }, 500);
     }, 4000);
 });
 
-// Scramble Text Animation
-function initScrambleAnimation() {
-    // Register the ScrambleTextPlugin
-    gsap.registerPlugin(ScrambleTextPlugin);
+// Initialize all text animations
+function initTextAnimations() {
+    // Prepare slide-up text elements
+    prepareSlideUpText();
     
-    // Define the scramble characters
-    const scrambleChars = "1234567890.*/-+";
+    // Initialize intersection observers
+    initIntersectionObservers();
+}
+
+// Prepare slide-up text by wrapping each character in spans
+function prepareSlideUpText() {
+    const slideUpElements = document.querySelectorAll('.slide-up-text');
     
-    // Get all elements with the scramble-text class
-    const scrambleElements = document.querySelectorAll('.scramble-text');
-    
-    // Mark elements as animated to prevent scroll re-triggering
-    scrambleElements.forEach(element => {
-        element.classList.add('animated');
-    });
-    
-    // Create a timeline for staggered animations
-    const scrambleTimeline = gsap.timeline({
-        delay: 0.5, // Small delay after page load
-        onComplete: function() {
-            console.log('Scramble animation complete');
-        }
-    });
-    
-    // Animate each element with staggered timing
-    scrambleElements.forEach((element, index) => {
-        const originalText = element.textContent;
+    slideUpElements.forEach(element => {
+        const text = element.textContent;
+        const words = text.split(/(\s+)/);
         
-        scrambleTimeline.to(element, {
-            duration: 1.5,
-            scrambleText: {
-                text: originalText,
-                chars: scrambleChars,
-                revealDelay: 0,
-                speed: 0.8,
-                ease: "none"
-            },
-            opacity: 1
-        }, index * 0.2); // Stagger the start of each animation
+        let newHTML = '';
+        words.forEach(word => {
+            if (word.trim() === '') {
+                newHTML += word; // Preserve whitespace
+            } else {
+                // Wrap each character in a span
+                const chars = word.split('');
+                const wrappedChars = chars.map(char => 
+                    `<span class="char">${char}</span>`
+                ).join('');
+                newHTML += wrappedChars;
+            }
+        });
+        
+        element.innerHTML = newHTML;
     });
 }
 
+// Initialize intersection observers for animations
+function initIntersectionObservers() {
+    // Observer for slide-up text (character by character)
+    const textObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                animateSlideUpText(entry.target);
+                entry.target.classList.add('animated');
+            }
+        });
+    }, {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observer for pan-up elements (calculator and history)
+    const panUpObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                setTimeout(() => {
+                    entry.target.classList.add('animated');
+                }, 200);
+            }
+        });
+    }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all slide-up text elements
+    document.querySelectorAll('.slide-up-text').forEach(element => {
+        textObserver.observe(element);
+    });
+
+    // Observe all pan-up elements
+    document.querySelectorAll('.pan-up-element').forEach(element => {
+        panUpObserver.observe(element);
+    });
+}
+
+// Animate slide-up text character by character
+function animateSlideUpText(element) {
+    const chars = element.querySelectorAll('.char');
+    
+    // Use GSAP for smooth character animation
+    if (typeof gsap !== 'undefined') {
+        gsap.to(chars, {
+            duration: 0.6,
+            y: 0,
+            opacity: 1,
+            stagger: 0.03,
+            ease: "back.out(1.7)"
+        });
+    } else {
+        // Fallback: CSS transitions
+        chars.forEach((char, index) => {
+            setTimeout(() => {
+                char.classList.add('animated');
+            }, index * 50);
+        });
+    }
+}
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('.nav-link').forEach(link => {
@@ -75,7 +122,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
         const targetSection = document.querySelector(targetId);
         if (targetSection) {
             window.scrollTo({
-                top: targetSection.offsetTop - 80, // Adjust for fixed navbar
+                top: targetSection.offsetTop - 80,
                 behavior: 'smooth'
             });
         }
@@ -92,46 +139,7 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Scroll-triggered animations for elements that weren't initially animated
-const observerOptions = {
-    threshold: 0.3,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const scrambleElements = entry.target.querySelectorAll('.scramble-text:not(.animated)');
-            scrambleElements.forEach(element => {
-                const originalText = element.textContent;
-                gsap.to(element, {
-                    duration: 1.5,
-                    scrambleText: {
-                        text: originalText,
-                        chars: "1234567890.*/-+",
-                        revealDelay: 0,
-                        speed: 0.8,
-                        ease: "none"
-                    },
-                    opacity: 1,
-                    onComplete: function() {
-                        element.classList.add('animated');
-                    }
-                });
-            });
-        }
-    });
-}, observerOptions);
-
-// Initialize observer when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-    const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-});
-
-// Existing Calculator Logic (unchanged)
+// ========== EXISTING CALCULATOR LOGIC (UNCHANGED) ==========
 // DOM elements
 const form = document.getElementById('calculatorForm');
 const num1Input = document.getElementById('num1');
@@ -164,7 +172,6 @@ let justCalculated = false;
 
 // Function to append number or decimal
 function appendNumber(value) {
-    // If we just calculated and user types a number, start fresh
     if (justCalculated) {
         firstNumber = null;
         operation = null;
@@ -208,7 +215,6 @@ operationButtons.forEach(button => {
 function handleOperation(op) {
     const currentValue = parseFloat(currentOperandDisplay.textContent);
     
-    // If we just calculated and user presses an operator, continue with the result
     if (justCalculated) {
         justCalculated = false;
         firstNumber = currentValue;
@@ -219,20 +225,16 @@ function handleOperation(op) {
     }
     
     if (firstNumber === null) {
-        // First operation - store the number
         firstNumber = currentValue;
         operation = op;
         previousOperandDisplay.textContent = `${formatNumber(firstNumber)} ${getOperationSymbol(op)}`;
         shouldResetDisplay = true;
     } else if (operation && shouldResetDisplay) {
-        // User changed their mind about the operation before entering second number
         operation = op;
         previousOperandDisplay.textContent = `${formatNumber(firstNumber)} ${getOperationSymbol(op)}`;
     } else if (operation) {
-        // Chain operations - calculate previous operation first
         const secondNumber = currentValue;
         calculateResult(firstNumber, operation, secondNumber, true).then(() => {
-            // After calculation, set up for next operation
             operation = op;
             previousOperandDisplay.textContent = `${formatNumber(firstNumber)} ${getOperationSymbol(op)}`;
             shouldResetDisplay = true;
@@ -310,13 +312,11 @@ async function calculateResult(num1, op, num2, isChaining = false) {
             throw new Error(data.error);
         }
 
-        // Update the display
         firstNumber = data.result;
         currentOperandDisplay.textContent = formatNumber(data.result);
         currentOperandDisplay.classList.add('updated');
         setTimeout(() => currentOperandDisplay.classList.remove('updated'), 300);
 
-        // Add to history only if not chaining
         if (!isChaining) {
             addToHistory(num1, op, num2, data.result);
         }
@@ -337,20 +337,16 @@ async function calculateResult(num1, op, num2, isChaining = false) {
 function formatNumber(num) {
     if (isNaN(num)) return 'Error';
     
-    // Handle division by zero
     if (!isFinite(num)) return 'Cannot divide by zero';
     
-    // Handle very large or very small numbers
     if (Math.abs(num) >= 1e15 || (Math.abs(num) < 1e-6 && num !== 0)) {
         return num.toExponential(6);
     }
     
-    // Handle regular numbers
     if (Number.isInteger(num) && Math.abs(num) < 1e12) {
         return num.toString();
     }
     
-    // Handle decimals
     return parseFloat(num.toPrecision(10)).toString();
 }
 
@@ -359,7 +355,6 @@ function showError(message) {
     errorDiv.textContent = message;
     errorDiv.style.display = 'block';
     
-    // Hide error after 5 seconds
     setTimeout(() => {
         errorDiv.style.display = 'none';
     }, 5000);
@@ -377,7 +372,6 @@ function addToHistory(num1, op, num2, result) {
     
     calculationHistory.push(historyItem);
     
-    // Keep only last 50 calculations
     if (calculationHistory.length > 50) {
         calculationHistory.shift();
     }
@@ -403,7 +397,6 @@ function renderHistory() {
     
     historyContent.innerHTML = historyHTML;
     
-    // Auto-scroll to bottom to show newest calculation
     historyContent.parentElement.scrollTop = historyContent.parentElement.scrollHeight;
 }
 
@@ -419,22 +412,18 @@ clearHistoryBtn.addEventListener('click', clearHistory);
 
 // Keyboard Input Support
 document.addEventListener('keydown', (e) => {
-    // Prevent default behavior for calculator keys
     if (['0','1','2','3','4','5','6','7','8','9','.','+','-','*','/','Enter','Escape','Backspace'].includes(e.key)) {
         e.preventDefault();
     }
     
-    // Number keys (0-9)
     if (e.key >= '0' && e.key <= '9') {
         appendNumber(e.key);
     }
     
-    // Decimal point
     else if (e.key === '.') {
         appendNumber('.');
     }
     
-    // Operations
     else if (e.key === '+') {
         handleOperation('add');
         operationButtons.forEach(btn => btn.classList.remove('active'));
@@ -456,7 +445,6 @@ document.addEventListener('keydown', (e) => {
         document.querySelector('[data-operation="divide"]').classList.add('active');
     }
     
-    // Enter key - calculate result
     else if (e.key === 'Enter') {
         if (firstNumber !== null && operation !== null) {
             const secondNumber = parseFloat(currentOperandDisplay.textContent);
@@ -469,12 +457,10 @@ document.addEventListener('keydown', (e) => {
         }
     }
     
-    // Escape key - clear
     else if (e.key === 'Escape') {
         clearButton.click();
     }
     
-    // Backspace key
     else if (e.key === 'Backspace') {
         if (currentOperandDisplay.textContent.length === 1) {
             currentOperandDisplay.textContent = '0';

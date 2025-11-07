@@ -119,12 +119,45 @@ body {
 }
 
 /* On hover: change color and animate the underline */
-
-
 .nav-link:hover::after {
     width: 100%;
 }
 
+/* Slide-up text animation */
+.slide-up-text {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.slide-up-text.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Character-by-character animation */
+.char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.char.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Pan-up animation for calculator and history */
+.pan-up-element {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.pan-up-element.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 /* Hero Section */
 .hero-section {
@@ -556,9 +589,6 @@ body {
     font-size: 0.9rem;
     text-align: center;
 }
-
-
-
 
 /* Animation for result update */
 @keyframes resultUpdate {
