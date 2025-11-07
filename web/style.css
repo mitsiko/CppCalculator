@@ -89,7 +89,7 @@ body {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 10px 30px;
+    padding: 15px 30px;
 }
 
 .nav-logo {
@@ -169,7 +169,7 @@ body {
 
 /* Hero Section */
 .hero-section {
-    padding: 120px 0px 120px;
+    padding: 120px 20px;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -184,7 +184,7 @@ body {
 .hero-columns {
     display: flex;
     gap: 60px;
-    margin: 50px 120px 50px 120px;
+    margin: 50px 120px;
     flex-wrap: wrap;
 }
 
@@ -195,7 +195,7 @@ body {
 
 .hero-text p {
     font-size: 1.1rem;
-    line-height: 1.1;
+    line-height: 1.4;
     color: #333;
     font-family: 'Manrope', sans-serif;
 }
@@ -209,7 +209,7 @@ body {
 }
 
 .hero-title h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     color: #192918;
     text-align: center;
     margin-top: -5px; 
@@ -256,7 +256,7 @@ body {
 
 /* Middle Section */
 .middle-section {
-    padding: 80px 80px 250px 80px;
+    padding: 80px 40px 150px 40px;
     background-color: #e4ebe4;
     display: flex;
     flex-direction: row;
@@ -265,7 +265,7 @@ body {
 .middle-animation{
     flex-basis: 20%;
     align-items: center;
-    padding: 40px 80px;
+    padding: 20px 40px;
 }
 
 .middle-container {
@@ -310,7 +310,7 @@ body {
 
 /* Footer Section */
 .footer-section {
-    padding: 20px 80px;
+    padding: 20px 40px;
     color: #192918;
     background-color: #e4ebe4;
     font-family: 'Manrope', sans-serif;
@@ -321,18 +321,18 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    gap: 100px;
+    gap: 60px;
     flex-wrap: wrap;
 }
 
 .footer-left, .footer-right {
     flex: 1;
-    min-width: 300px;
+    min-width: 250px;
 }
 
 .footer-left p, .footer-right p {
     font-family: 'Manrope', sans-serif;
-    line-height: 1;
+    line-height: 1.4;
     margin-top: 20px;
     font-size: 0.8rem;
 }
@@ -474,7 +474,7 @@ body {
 }
 
 .calculator-model{
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Michroma', sans-serif;
     font-size: 1rem;
     font-weight: bold;
     color:#444;
@@ -628,58 +628,168 @@ body {
 }
 
 /* Responsive design */
-@media (max-width: 900px) {
-    .main-container {
-        width: 95vw;
-        min-width: 300px;
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+    .hero-columns {
+        margin: 30px 60px;
+        gap: 40px;
     }
-    
-    .calculator-wrapper {
-        flex-direction: column-reverse;
-        align-items: center;
-        gap: 20px;
+
+    .hero-title h1 {
+        font-size: 2.5rem;
     }
-    
-    .calculator {
-        width: 100%;
-        max-width: 400px;
+
+    .hero-text p {
+        font-size: 1rem;
+        line-height: 1.3;
     }
-    
-    .history-panel {
-        width: 100%;
-        max-width: 400px;
+
+    .middle-section {
+        padding: 60px 30px 120px 30px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section-description {
+        font-size: 1rem;
+    }
+
+    .footer-section {
+        padding: 20px 40px;
+    }
+
+    .footer-container {
+        gap: 40px;
+    }
+}
+
+/* Mobile (up to 767px) */
+@media (max-width: 767px) {
+    /* Navigation */
+    .navbar {
+        padding: 3px 0;
+    }
+
+    .nav-container {
+        padding: 10px 20px;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .nav-link {
+        font-size: 0.95rem;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: 100px 20px 80px 20px;
+    }
+
+    .hero-columns {
+        margin: 20px;
+        gap: 30px;
+        flex-direction: column;
+    }
+
+    .hero-text {
+        min-width: 100%;
+    }
+
+    .hero-text p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    .hero-text p br {
+        display: none;
+    }
+
+    .hero-title {
+        min-width: 100%;
+        justify-content: flex-start;
     }
 
     .hero-title h1 {
         font-size: 2rem;
+        text-align: left;
+    }
+
+    /* Gallery */
+    .gallery-item {
+        width: 180px;
+        height: 315px;
+    }
+
+    @keyframes scrollGallery {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-180px * 6 - 20px * 6));
+        }
+    }
+
+    /* Middle Section */
+    .middle-section {
+        padding: 40px 20px 80px 20px;
+        flex-direction: column;
+    }
+
+    .middle-container {
+        flex-basis: 100%;
     }
 
     .section-title {
         font-size: 1.5rem;
     }
 
-    .nav-links {
-        gap: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .calculator {
-        padding: 15px;
-    }
-    
-    .current-operand {
-        font-size: 2rem;
-    }
-    
-    .calculator-grid button {
-        padding: 12px;
-        font-size: 1.1rem;
+    .section-description {
+        font-size: 0.9rem;
+        line-height: 1.5;
     }
 
-    .hero-columns {
+    .section-description br {
+        display: none;
+    }
+
+    /* Calculator Section */
+    .calculator-section {
+        padding: 60px 15px;
+    }
+
+    .main-container {
+        width: 100%;
+    }
+
+    .calculator-wrapper {
         flex-direction: column;
-        gap: 30px;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .calculator {
+        width: 100%;
+        max-width: 350px;
+        flex: none;
+    }
+
+    .history-panel {
+        width: 100%;
+        max-width: 350px;
+        flex: none;
+        order: -1;
+    }
+
+    /* Footer */
+    .footer-section {
+        padding: 20px;
     }
 
     .footer-container {
@@ -687,9 +797,119 @@ body {
         gap: 20px;
     }
 
-    .nav-container {
-        flex-direction: column;
-        gap: 10px;
+    .footer-left, .footer-right {
+        min-width: 100%;
+        text-align: left;
+    }
+
+    .footer-right {
+        text-align: left;
+    }
+
+    .footer-left p, .footer-right p {
+        font-size: 0.75rem;
+        line-height: 1.4;
+    }
+}
+
+/* Small Mobile (up to 480px) */
+@media (max-width: 480px) {
+    /* Navigation */
+    .nav-link {
+        font-size: 0.85rem;
+    }
+
+    .nav-links {
+        gap: 12px;
+    }
+
+    /* Hero */
+    .hero-section {
+        padding: 90px 15px 60px 15px;
+    }
+
+    .hero-columns {
+        margin: 15px;
+        gap: 25px;
+    }
+
+    .hero-text p {
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+
+    .hero-title h1 {
+        font-size: 1.75rem;
+    }
+
+    /* Gallery */
+    .gallery-item {
+        width: 150px;
+        height: 262.5px;
+    }
+
+    @keyframes scrollGallery {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-150px * 6 - 20px * 6));
+        }
+    }
+
+    /* Middle Section */
+    .middle-section {
+        padding: 30px 15px 60px 15px;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .section-description {
+        font-size: 0.85rem;
+    }
+
+    /* Calculator */
+    .calculator-section {
+        padding: 40px 10px;
+    }
+
+    .calculator {
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    .current-operand {
+        font-size: 2rem;
+    }
+
+    .calculator-grid button {
+        padding: 12px;
+        font-size: 1.1rem;
+    }
+
+    .history-panel {
+        max-width: 100%;
+        padding: 12px;
+    }
+
+    .history-header h3 {
+        font-size: 0.65rem;
+    }
+
+    .clear-history-btn {
+        font-size: 0.45rem;
+        padding: 2px 8px;
+    }
+
+    /* Footer */
+    .footer-section {
+        padding: 15px;
+    }
+
+    .footer-left p, .footer-right p {
+        font-size: 0.7rem;
     }
 }
 
