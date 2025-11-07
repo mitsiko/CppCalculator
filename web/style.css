@@ -71,17 +71,17 @@ body {
     background: transparent;
     border-bottom: 1px solid #192918;
     z-index: 1000;
-    padding: 15px 0;
+    padding: 5px 0;
     transition: background-color 0.3s ease;
 }
 
 .nav-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 15px 30px;
 }
 
 .nav-logo {
@@ -135,11 +135,12 @@ body {
 }
 
 /* Character-by-character animation */
+/* Character-by-character animation */
 .char {
     display: inline-block;
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .char.animated {
@@ -151,7 +152,7 @@ body {
 .pan-up-element {
     opacity: 0;
     transform: translateY(50px);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .pan-up-element.animated {
@@ -176,7 +177,7 @@ body {
 .hero-columns {
     display: flex;
     gap: 60px;
-    margin: 65px;
+    margin: 50px 120px 50px 120px;
     flex-wrap: wrap;
 }
 
@@ -196,14 +197,16 @@ body {
     flex: 1;
     min-width: 300px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start; /* ⬅️ push content to the top */
+    justify-content: center; /* keep it horizontally centered */
 }
 
 .hero-title h1 {
     font-size: 3rem;
     color: #192918;
     text-align: center;
+    margin-top: -5px; 
+
 }
 
 /* Gallery Section */
@@ -247,7 +250,7 @@ body {
 
 /* Middle Section */
 .middle-section {
-    padding: 20px 80px;
+    padding: 80px 80px 250px 80px;
     background-color: #e4ebe4;
     display: flex;
     flex-direction: row;
@@ -285,7 +288,7 @@ body {
 
 /* Calculator Section */
 .calculator-section {
-    padding: 90px 20px;
+    padding: 100px 20px;
     background-color: #e4ebe4;
 }
 

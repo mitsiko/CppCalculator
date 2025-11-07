@@ -98,10 +98,10 @@ function animateSlideUpText(element) {
     // Use GSAP for smooth character animation
     if (typeof gsap !== 'undefined') {
         gsap.to(chars, {
-            duration: 0.6,
+            duration: 0.2, // Changed from 0.6s to 0.4s
             y: 0,
             opacity: 1,
-            stagger: 0.03,
+            stagger: 0.02, // Changed from 0.03s to 0.02s
             ease: "back.out(1.7)"
         });
     } else {
@@ -109,7 +109,7 @@ function animateSlideUpText(element) {
         chars.forEach((char, index) => {
             setTimeout(() => {
                 char.classList.add('animated');
-            }, index * 50);
+            }, index * 30); // Changed from 50ms to 30ms
         });
     }
 }
