@@ -15,11 +15,8 @@ const decimalButton = document.querySelector('.decimal-btn');
 const errorDiv = document.getElementById('error');
 
 // History elements
-const toggleHistoryBtn = document.getElementById('toggleHistoryBtn');
-const historyTape = document.getElementById('historyTape');
 const historyContent = document.getElementById('historyContent');
 const clearHistoryBtn = document.getElementById('clearHistoryBtn');
-const calculatorWrapper = document.querySelector('.calculator-wrapper');
 
 // API endpoint
 const API_URL = 'http://localhost:8080/api/calculate';
@@ -28,7 +25,6 @@ const API_URL = 'http://localhost:8080/api/calculate';
 let firstNumber = null;
 let operation = null;
 let shouldResetDisplay = false;
-let historyVisible = false;
 let calculationHistory = [];
 let justCalculated = false;
 
@@ -235,23 +231,7 @@ function showError(message) {
     }, 5000);
 }
 
-// History Tape Functions
-function toggleHistory() {
-    historyVisible = !historyVisible;
-    
-    if (historyVisible) {
-        historyTape.style.display = 'block';
-        calculatorWrapper.classList.remove('history-hidden');
-        calculatorWrapper.classList.add('history-visible');
-        toggleHistoryBtn.textContent = 'Hide History Tape';
-    } else {
-        historyTape.style.display = 'none';
-        calculatorWrapper.classList.remove('history-visible');
-        calculatorWrapper.classList.add('history-hidden');
-        toggleHistoryBtn.textContent = 'View History Tape';
-    }
-}
-
+// History Functions
 function addToHistory(num1, op, num2, result) {
     const historyItem = {
         num1: num1,
@@ -300,12 +280,8 @@ function clearHistory() {
     }
 }
 
-// Event listeners for history controls
-toggleHistoryBtn.addEventListener('click', toggleHistory);
+// Event listener for clear history button
 clearHistoryBtn.addEventListener('click', clearHistory);
-
-// Initialize wrapper state
-calculatorWrapper.classList.add('history-hidden');
 
 // Keyboard Input Support
 document.addEventListener('keydown', (e) => {

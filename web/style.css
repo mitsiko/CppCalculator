@@ -16,55 +16,34 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Stack content vertically */
-    align-items: center;      /* vertical centering */
-    justify-content: center;  /* horizontal centering */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .main-container {
     width: 60vw;
     max-width: 1000px;
     min-width: 400px;
-
     display: flex;
     flex-direction: column;
     gap: 30px;
     align-items: center;
 }
 
-/* Toggle History Button */
-.toggle-history-btn {
-    background-color: transparent;
-    color: #444;
-    border: 1px solid #444;
-    border-radius: 3px;
-    padding: 10px 28px;
-    border-radius: 0px;
-    font-family: 'Michroma',monospace;
-    font-size: 0.6rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.toggle-history-btn:hover {
-    transform: translateY(2px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.10);
-}
-
 .calculator-top-design-container{
-    display: flex;              /* activates flexbox */
-    flex-direction: row;        /* default value; ensures horizontal layout */
-    justify-content: space-between; /* controls horizontal alignment */
-    align-items: center;        /* controls vertical alignment */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .calculator-sensor{
-    display: flex;              /* activates flexbox */
-    flex-direction: row;        /* default value; ensures horizontal layout */
-    justify-content: flex-start; /* controls horizontal alignment */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;     
-    margin-bottom: 10px;   /* controls vertical alignment */
+    margin-bottom: 10px;
     margin-left: 10px;
 }
 
@@ -82,27 +61,16 @@ body {
     align-items: flex-start;
     gap: 2rem;
     width: 100%;
-    max-width: 1200px; /* prevents it from stretching too wide */
-    margin: 0 auto; /* centers wrapper in parent */
+    max-width: 1200px;
+    margin: 0 auto;
     transition: all 0.3s ease;
 }
 
-/* When history is hidden - center calculator */
-.calculator-wrapper.history-hidden {
-    width: 300px;
-    flex-shrink: 0;
-}
-
-/* When history is visible - show full layout */
-.calculator-wrapper.history-visible {
-     justify-content: center;
-}
-
-/* Calculator card - Dynamic width based on history visibility */
+/* Calculator card */
 .calculator {
     position: relative;
     padding: 20px;
-    box-shadow: -20px 20px 10px #33353323;
+    box-shadow: -20px 20px 10px #33353333;
     backdrop-filter: blur(10px);
     border: 5px solid transparent;
     border-radius: 20px; 
@@ -116,39 +84,21 @@ body {
     flex: 0 0 350px;
     max-width: 600px;
 }
-/* Calculator width when history is hidden */
-.calculator-wrapper.history-hidden .calculator {
-    width: 350px;
-    flex-shrink: 0;
-}
 
-/* Calculator width when history is visible - 75% of container */
-.calculator-wrapper.history-visible .calculator {
-    width: 350px;
-    flex-shrink: 0;
-}
-
-/* History Tape - 20% width when visible */
-.history-tape {
-    flex: 0 1 250px; /* flexible width, max 250px */
+/* History Panel - Always visible */
+.history-panel {
+    flex: 0 1 250px;
     border-radius: 3px;
     padding: 15px;
-    box-shadow: -20px 20px 10px #33353323;
+    box-shadow: -20px 20px 10px #33353333;    
     backdrop-filter: blur(10px);
     font-family: 'Michroma', monospace;
     max-height: 500px;
     overflow-y: auto;
-    border: 1px solid #4444444f;
-    flex-shrink: 0;
-
-    border: 1px solid transparent; /* ✅ transparent to let gradient show */
+    border: 1px solid transparent;
     background: 
         linear-gradient(to right, #e7e5e0, #fffdf9, #fffdf9, #fffdf9) padding-box, 
         linear-gradient(to right, #969592, #fffdf9, #fffdf9) border-box;
-}
-
-.history-tape.hidden {
-    display: none;
 }
 
 .history-header {
@@ -210,6 +160,7 @@ body {
     font-family: Helvetica;
     padding: 20px 0;
 }
+
 .calculator-model{
     font-family: 'Michroma', monospace;
     font-size: 1rem;
@@ -222,12 +173,10 @@ body {
 .display {
     padding: 10px;
     border-radius: 5px;
-
     border: 5px solid transparent;
     background: 
         linear-gradient(to right,#1e2d24, #1e2d24) padding-box,  
         linear-gradient(to left, #75766b, #989989,#989989,  #979888) border-box;
-
     margin-bottom: 20px;
     text-align: right;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -280,7 +229,6 @@ body {
 .op-btn {
     color: #686e66 !important;
     font-size: 1.5rem !important;
-
     border-radius: 8px; 
     border: 5px solid transparent; 
     background:
@@ -291,7 +239,6 @@ body {
 .op-btn.active {
     color: #686e66 !important;
     font-size: 1.5rem !important;
-
     border-radius: 8px; 
     border: 5px solid transparent; 
     background:
@@ -300,8 +247,8 @@ body {
 }
 
 .equals-btn {
-    border-radius: 8px; /* ✅ add rounding if you want */
-    border: 5px solid transparent; /* ✅ transparent to let gradient show */
+    border-radius: 8px;
+    border: 5px solid transparent;
     background:
         linear-gradient(to right, #de8a4a,#b86e36) padding-box,
         linear-gradient(to right, #b86e36, #de8a4a) border-box;
@@ -322,21 +269,20 @@ body {
 }
 
 .decimal-btn{
-    border-radius: 8px; /* ✅ add rounding if you want */
-    border: 5px solid transparent; /* ✅ transparent to let gradient show */
+    border-radius: 8px;
+    border: 5px solid transparent;
     background:
         linear-gradient(to left, #686e66, #919791) padding-box,
         linear-gradient(to right, #61685f, #838b81) border-box;
 }
 
 .number-btn{
-    border-radius: 8px; /* ✅ add rounding if you want */
-    border: 5px solid transparent; /* ✅ transparent to let gradient show */
+    border-radius: 8px;
+    border: 5px solid transparent;
     background:
         linear-gradient(to left, #686e66, #919791) padding-box,
         linear-gradient(to right, #61685f, #838b81) border-box;
 }
-
 
 /* Error message */
 .error-message {
@@ -360,22 +306,22 @@ body {
     margin-top: 30px;
 }
 
-/* Scrollbar styling for history tape */
-.history-tape::-webkit-scrollbar {
+/* Scrollbar styling for history panel */
+.history-panel::-webkit-scrollbar {
     width: 6px;
 }
 
-.history-tape::-webkit-scrollbar-track {
+.history-panel::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 10px;
 }
 
-.history-tape::-webkit-scrollbar-thumb {
+.history-panel::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 10px;
 }
 
-.history-tape::-webkit-scrollbar-thumb:hover {
+.history-panel::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
 
@@ -392,13 +338,12 @@ body {
         gap: 20px;
     }
     
-    .calculator-wrapper.history-visible .calculator,
-    .calculator-wrapper.history-hidden .calculator {
+    .calculator {
         width: 100%;
         max-width: 400px;
     }
     
-    .history-tape {
+    .history-panel {
         width: 100%;
         max-width: 400px;
     }
