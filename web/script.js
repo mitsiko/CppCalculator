@@ -1,19 +1,45 @@
-// Loading Screen Logic
+// Create pixel grid for loading screen
+function createPixelGrid() {
+    const pixelGrid = document.getElementById('pixelGrid');
+    const cols = 12;
+    const rows = 8;
+    
+    for (let i = 0; i < rows * cols; i++) {
+        const pixel = document.createElement('div');
+        pixel.className = 'pixel';
+        pixelGrid.appendChild(pixel);
+    }
+}
+
+// Loading Screen Logic with GSAP pixel animation
 window.addEventListener('load', function() {
+    createPixelGrid();
+    
     const loadingScreen = document.getElementById('loadingScreen');
     const mainContent = document.getElementById('mainContent');
+    const pixels = document.querySelectorAll('.pixel');
     
-    // Show loading screen for 4 seconds
+    // Wait a moment, then start pixel disappearance animation
     setTimeout(function() {
-        loadingScreen.style.opacity = '0';
-        setTimeout(function() {
-            loadingScreen.style.display = 'none';
-            mainContent.style.display = 'block';
-            
-            // Initialize animations after loading screen
-            initTextAnimations();
-        }, 500);
-    }, 4000);
+        // Animate pixels disappearing one by one in random order
+        gsap.to(pixels, {
+            duration: 0,
+            opacity: 0,
+            stagger: {
+                amount: 2,
+                from: "random",
+                ease: "none"
+            },
+            onComplete: function() {
+                // Once pixels are gone, hide loading screen and show content
+                loadingScreen.style.display = 'none';
+                mainContent.style.display = 'block';
+                
+                // Initialize text animations
+                initTextAnimations();
+            }
+        });
+    }, 500);
 });
 
 // Initialize all text animations
@@ -98,10 +124,10 @@ function animateSlideUpText(element) {
     // Use GSAP for smooth character animation
     if (typeof gsap !== 'undefined') {
         gsap.to(chars, {
-            duration: 0.2, // Changed from 0.6s to 0.4s
+            duration: 0.2,
             y: 0,
             opacity: 1,
-            stagger: 0.02, // Changed from 0.03s to 0.02s
+            stagger: 0.02,
             ease: "back.out(1.7)"
         });
     } else {
@@ -109,22 +135,41 @@ function animateSlideUpText(element) {
         chars.forEach((char, index) => {
             setTimeout(() => {
                 char.classList.add('animated');
-            }, index * 30); // Changed from 50ms to 30ms
+            }, index * 30);
         });
     }
 }
 
-// Smooth scrolling for navigation links
+// Smooth scrolling for navigation links with centering for calculator
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
         const targetSection = document.querySelector(targetId);
+        
         if (targetSection) {
-            window.scrollTo({
-                top: targetSection.offsetTop - 80,
-                behavior: 'smooth'
-            });
+            if (targetId === '#calculator-section') {
+                // Center the calculator wrapper in viewport
+                const calculatorWrapper = document.querySelector('.calculator-wrapper');
+                const wrapperRect = calculatorWrapper.getBoundingClientRect();
+                const wrapperTop = wrapperRect.top + window.pageYOffset;
+                const viewportHeight = window.innerHeight;
+                const wrapperHeight = wrapperRect.height;
+                
+                // Calculate position to center wrapper in viewport
+                const scrollTo = wrapperTop - (viewportHeight / 2) + (wrapperHeight / 2);
+                
+                window.scrollTo({
+                    top: scrollTo,
+                    behavior: 'smooth'
+                });
+            } else {
+                // Default scroll behavior for other sections
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
         }
     });
 });

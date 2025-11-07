@@ -10,6 +10,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 h1, h2{
     font-family: 'Manrope', sans-serif;
 }
@@ -31,25 +32,32 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #192918;
+    background-color: #e4ebe4;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    transition: opacity 0.5s ease;
 }
 
-.loading-text {
-    font-family: 'Manrope', sans-serif;
-    font-size: 1.5rem;
-    color: #e4ebe4;    
-    animation: pulse 1.5s infinite;
+/* Pixel Grid */
+.pixel-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: 100vw;
+    height: 100vh;
+    gap: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
-@keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
+.pixel {
+    background-color: #192918;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    visibility: visible;
 }
 
 .main-content {
@@ -81,7 +89,7 @@ body {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 15px 30px;
+    padding: 10px 30px;
 }
 
 .nav-logo {
@@ -109,7 +117,7 @@ body {
 .nav-link::after {
     content: "";
     position: absolute;
-    bottom: -3px; /* move the line a bit lower under the text */
+    bottom: -3px;
     left: 0;
     width: 0;
     height: 1px;
@@ -134,7 +142,6 @@ body {
     transform: translateY(0);
 }
 
-/* Character-by-character animation */
 /* Character-by-character animation */
 .char {
     display: inline-block;
@@ -197,8 +204,8 @@ body {
     flex: 1;
     min-width: 300px;
     display: flex;
-    align-items: flex-start; /* ⬅️ push content to the top */
-    justify-content: center; /* keep it horizontally centered */
+    align-items: flex-start;
+    justify-content: center;
 }
 
 .hero-title h1 {
@@ -206,7 +213,6 @@ body {
     color: #192918;
     text-align: center;
     margin-top: -5px; 
-
 }
 
 /* Gallery Section */
@@ -290,6 +296,16 @@ body {
 .calculator-section {
     padding: 100px 20px;
     background-color: #e4ebe4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Footer Section */
@@ -299,7 +315,6 @@ body {
     background-color: #e4ebe4;
     font-family: 'Manrope', sans-serif;
     border-top: 1px solid #192918;
-
 }
 
 .footer-container {
@@ -326,7 +341,7 @@ body {
     text-align: right;
 }
 
-/* Existing Calculator Styles (unchanged) */
+/* Existing Calculator Styles */
 .calculator-top-design-container{
     display: flex;
     flex-direction: row;
@@ -480,7 +495,7 @@ body {
 }
 
 .previous-operand {
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Calculator', sans-serif;
     min-height: 24px;
     font-size: 1rem;
     color: #43df9c;
@@ -488,7 +503,7 @@ body {
 }
 
 .current-operand {
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Calculator', sans-serif;
     font-size: 2.3rem;
     font-weight: 700;
     color: #43df9c;
@@ -593,15 +608,23 @@ body {
     text-align: center;
 }
 
-/* Animation for result update */
-@keyframes resultUpdate {
-    0% { transform: scale(0.95); opacity: 0.7; }
-    50% { transform: scale(1.02); }
-    100% { transform: scale(1); opacity: 1; }
+/* Scrollbar styling for history panel */
+.history-panel::-webkit-scrollbar {
+    width: 6px;
 }
 
-.current-operand.updated {
-    animation: none;
+.history-panel::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.history-panel::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.history-panel::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 /* Responsive design */
@@ -668,4 +691,15 @@ body {
         flex-direction: column;
         gap: 10px;
     }
+}
+
+/* Animation for result update */
+@keyframes resultUpdate {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.current-operand.updated {
+    animation: none;
 }
