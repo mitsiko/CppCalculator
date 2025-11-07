@@ -3,76 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C++ Basic Calculator</title>
+    <title>C++ BASIC CALCULATOR</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Michroma&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="main-container">        
-        <div class="calculator-wrapper">
-            <div class="calculator">
-                <div class="calculator-top-design-container">
-                    <div class="calculator-model">GRUP-2<span style="font-size: 0.5rem; margin-left: 5px; color: #246356;">FX-82VR</span></div>
-                    <div class="calculator-sensor">
-                        <div class="sensor-box"></div>
-                        <div class="sensor-box"></div>
-                        <div class="sensor-box"></div>
-                        <div class="sensor-box"></div>
-                    </div>
-                </div>
-                
-                <div class="display">
-                    <div class="previous-operand"></div>
-                    <div class="current-operand">0</div>
-                </div>
-                
-                <form id="calculatorForm">
-                    <div class="calculator-grid">
-                        <button type="button" class="clear-btn" data-action="clear">C</button>
-                        <button type="button" class="clear-entry-btn" data-action="clear-entry">CE</button>
-                        <button type="button" class="backspace-btn" data-action="backspace">⌫</button>
-                        <button type="button" class="op-btn" data-operation="divide">÷</button>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-text">LOADING...</div>
+    </div>
 
-                        <button type="button" class="number-btn" data-number="7">7</button>
-                        <button type="button" class="number-btn" data-number="8">8</button>
-                        <button type="button" class="number-btn" data-number="9">9</button>
-                        <button type="button" class="op-btn" data-operation="multiply">×</button>
-
-                        <button type="button" class="number-btn" data-number="4">4</button>
-                        <button type="button" class="number-btn" data-number="5">5</button>
-                        <button type="button" class="number-btn" data-number="6">6</button>
-                        <button type="button" class="op-btn" data-operation="subtract">−</button>
-
-                        <button type="button" class="number-btn" data-number="1">1</button>
-                        <button type="button" class="number-btn" data-number="2">2</button>
-                        <button type="button" class="number-btn" data-number="3">3</button>
-                        <button type="button" class="op-btn" data-operation="add">+</button>
-
-                        <button type="button" class="number-btn zero-btn" data-number="0">0</button>
-                        <button type="button" class="decimal-btn" data-number=".">.</button>
-                        <button type="button" class="equals-btn" data-action="calculate">=</button>
-                    </div>
-
-                    <input type="hidden" id="operation" name="operation">
-                    <input type="hidden" id="num1" name="num1">
-                    <input type="hidden" id="num2" name="num2">
-                </form>
-
-                <div id="error" class="error-message" style="display: none;"></div>
-            </div>
-
-            <div class="history-panel">
-                <div class="history-header">
-                    <h3>HISTORY</h3>
-                    <button id="clearHistoryBtn" class="clear-history-btn">Clear</button>
-                </div>
-                <div class="history-content" id="historyContent">
-                    <p class="empty-history">No calculations yet</p>
+    <!-- Main Content (hidden during loading) -->
+    <div id="mainContent" class="main-content" style="display: none;">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo"></div>
+                <div class="nav-links">
+                    <a href="#hero" class="nav-link scramble-text">ABOUT</a>
+                    <a href="#calculator-section" class="nav-link scramble-text">CALCULATE</a>
                 </div>
             </div>
-        </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-container">
+                <div class="hero-columns">
+                    <div class="hero-text">
+                        <p class="scramble-text">A MINIMALIST CALCULATOR POWERED BY A C++ BACKEND USING <br>CPP-HTTPLIB,WITH A FRONTEND BUILT USING HTML, CSS, AND <br>JAVASCRIPT. IT INCLUDES A CALCULATION HISTORY TAPE FEATURE <br>FOR EASY REFERENCE.</p>
+                    </div>
+                    <div class="hero-title">
+                        <h1 class="scramble-text" style="text-align: left;">BASIC CALCULATOR</h1>
+                    </div>
+                </div>
+                <div class="gallery-container">
+                    <div class="scrolling-gallery">
+                        <div class="gallery-item">
+                            <img src="1.png" alt="Gallery Image 1">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="2.png" alt="Gallery Image 2">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="3.png" alt="Gallery Image 3">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="4.png" alt="Gallery Image 4">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="5.png" alt="Gallery Image 5">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="6.png" alt="Gallery Image 6">
+                        </div>
+                        <!-- Duplicate items for seamless loop -->
+                        <div class="gallery-item">
+                            <img src="1.png" alt="Gallery Image 1">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="2.png" alt="Gallery Image 2">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="3.png" alt="Gallery Image 3">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="4.png" alt="Gallery Image 4">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="5.png" alt="Gallery Image 5">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="6.png" alt="Gallery Image 6">
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <!-- Middle Section -->
+        <section class="middle-section">
+            <div class="middle-animation">Animation</div>
+            <div class="middle-container">
+                <h1 class="section-title scramble-text">PROGRAM SPECIFICATIONS</h1>
+                <p class="section-description scramble-text">SUPPORTS POSITIVE AND NEGATIVE INTEGERS. <br>ALLOWS CHAINING OF OPERATIONS. <br>KEEPS A RECORD OF PAST CALCULATIONS.</p>
+            </div>
+        </section>
+
+        <!-- Calculator Section -->
+        <section id="calculator-section" class="calculator-section">
+            <div class="main-container">        
+                <div class="calculator-wrapper">
+                    <div class="calculator">
+                        <div class="calculator-top-design-container">
+                            <div class="calculator-model">GRUP-2<span style="font-size: 0.5rem; margin-left: 5px; color: #246356;">FX-82VR</span></div>
+                            <div class="calculator-sensor">
+                                <div class="sensor-box"></div>
+                                <div class="sensor-box"></div>
+                                <div class="sensor-box"></div>
+                                <div class="sensor-box"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="display">
+                            <div class="previous-operand"></div>
+                            <div class="current-operand">0</div>
+                        </div>
+                        
+                        <form id="calculatorForm">
+                            <div class="calculator-grid">
+                                <button type="button" class="clear-btn" data-action="clear">C</button>
+                                <button type="button" class="clear-entry-btn" data-action="clear-entry">CE</button>
+                                <button type="button" class="backspace-btn" data-action="backspace">⌫</button>
+                                <button type="button" class="op-btn" data-operation="divide">÷</button>
+
+                                <button type="button" class="number-btn" data-number="7">7</button>
+                                <button type="button" class="number-btn" data-number="8">8</button>
+                                <button type="button" class="number-btn" data-number="9">9</button>
+                                <button type="button" class="op-btn" data-operation="multiply">×</button>
+
+                                <button type="button" class="number-btn" data-number="4">4</button>
+                                <button type="button" class="number-btn" data-number="5">5</button>
+                                <button type="button" class="number-btn" data-number="6">6</button>
+                                <button type="button" class="op-btn" data-operation="subtract">−</button>
+
+                                <button type="button" class="number-btn" data-number="1">1</button>
+                                <button type="button" class="number-btn" data-number="2">2</button>
+                                <button type="button" class="number-btn" data-number="3">3</button>
+                                <button type="button" class="op-btn" data-operation="add">+</button>
+
+                                <button type="button" class="number-btn zero-btn" data-number="0">0</button>
+                                <button type="button" class="decimal-btn" data-number=".">.</button>
+                                <button type="button" class="equals-btn" data-action="calculate">=</button>
+                            </div>
+
+                            <input type="hidden" id="operation" name="operation">
+                            <input type="hidden" id="num1" name="num1">
+                            <input type="hidden" id="num2" name="num2">
+                        </form>
+
+                        <div id="error" class="error-message" style="display: none;"></div>
+                    </div>
+
+                    <div class="history-panel">
+                        <div class="history-header">
+                            <h3>HISTORY</h3>
+                            <button id="clearHistoryBtn" class="clear-history-btn">CLEAR</button>
+                        </div>
+                        <div class="history-content" id="historyContent">
+                            <p class="empty-history">No calculations yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="footer-section">
+            <div class="footer-container">
+                <div class="footer-left">
+                    <p class="scramble-text">THIS PROJECT WAS DEVELOPED BY UPHSD MOLINO COLLEGE STUDENTS AS PART OF AN EXPLORATION AND LEARNING EXERCISE USING THE C++ LANGUAGE.</p>
+                </div>
+                <div class="footer-right">
+                    <p class="scramble-text">© 2025 ALL RIGHTS RESERVED</p>
+                </div>
+            </div>
+        </footer>
     </div>
     
+    <!-- GSAP Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/TextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

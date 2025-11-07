@@ -1,3 +1,137 @@
+// Loading Screen Logic
+window.addEventListener('load', function() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const mainContent = document.getElementById('mainContent');
+    
+    // Show loading screen for 4 seconds
+    setTimeout(function() {
+        loadingScreen.style.opacity = '0';
+        setTimeout(function() {
+            loadingScreen.style.display = 'none';
+            mainContent.style.display = 'block';
+            
+            // Initialize scramble animation after loading screen
+            if (typeof gsap !== 'undefined' && typeof ScrambleTextPlugin !== 'undefined') {
+                initScrambleAnimation();
+            } else {
+                console.warn('GSAP ScrambleTextPlugin not available');
+                // Fallback: just show the text normally
+                document.querySelectorAll('.scramble-text').forEach(el => {
+                    el.style.opacity = '1';
+                });
+            }
+        }, 500);
+    }, 4000);
+});
+
+// Scramble Text Animation
+function initScrambleAnimation() {
+    // Register the ScrambleTextPlugin
+    gsap.registerPlugin(ScrambleTextPlugin);
+    
+    // Define the scramble characters
+    const scrambleChars = "1234567890.*/-+";
+    
+    // Get all elements with the scramble-text class
+    const scrambleElements = document.querySelectorAll('.scramble-text');
+    
+    // Mark elements as animated to prevent scroll re-triggering
+    scrambleElements.forEach(element => {
+        element.classList.add('animated');
+    });
+    
+    // Create a timeline for staggered animations
+    const scrambleTimeline = gsap.timeline({
+        delay: 0.5, // Small delay after page load
+        onComplete: function() {
+            console.log('Scramble animation complete');
+        }
+    });
+    
+    // Animate each element with staggered timing
+    scrambleElements.forEach((element, index) => {
+        const originalText = element.textContent;
+        
+        scrambleTimeline.to(element, {
+            duration: 1.5,
+            scrambleText: {
+                text: originalText,
+                chars: scrambleChars,
+                revealDelay: 0,
+                speed: 0.8,
+                ease: "none"
+            },
+            opacity: 1
+        }, index * 0.2); // Stagger the start of each animation
+    });
+}
+
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+            window.scrollTo({
+                top: targetSection.offsetTop - 80, // Adjust for fixed navbar
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Navbar background on scroll
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.style.backgroundColor = 'rgba(228, 235, 228, 0.95)';
+    } else {
+        navbar.style.backgroundColor = 'transparent';
+    }
+});
+
+// Scroll-triggered animations for elements that weren't initially animated
+const observerOptions = {
+    threshold: 0.3,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const scrambleElements = entry.target.querySelectorAll('.scramble-text:not(.animated)');
+            scrambleElements.forEach(element => {
+                const originalText = element.textContent;
+                gsap.to(element, {
+                    duration: 1.5,
+                    scrambleText: {
+                        text: originalText,
+                        chars: "1234567890.*/-+",
+                        revealDelay: 0,
+                        speed: 0.8,
+                        ease: "none"
+                    },
+                    opacity: 1,
+                    onComplete: function() {
+                        element.classList.add('animated');
+                    }
+                });
+            });
+        }
+    });
+}, observerOptions);
+
+// Initialize observer when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
+
+// Existing Calculator Logic (unchanged)
 // DOM elements
 const form = document.getElementById('calculatorForm');
 const num1Input = document.getElementById('num1');
